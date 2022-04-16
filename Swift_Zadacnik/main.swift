@@ -213,4 +213,301 @@ func arrayMultyply(arrayOne: [String], arrayTwo: [String]) {
 arrayMultyply(arrayOne: ["hello", "how"], arrayTwo: ["are", "you"])
 //________________________________________________________7.2
 
+var journalArray1 = [String]()
+func fillJournal(name: String, proffesion: String, grade: Int) {
+    journalArray1.append(name)
+    journalArray1.append(proffesion)
+    journalArray1.append(String(grade))
+    for students in journalArray1 {
+        print(students)
+    }
+}
+fillJournal(name: "max", proffesion: "driver", grade: 8)
+//________________________________________________________7.3
+func addArray(name: String, sername: String) {
+    var newArrayTwo = [String]()//массив у нас глобальный, его можно вынести за функцию
+    newArrayTwo.append(name)
+    newArrayTwo.append(sername)
+    print(newArrayTwo)
+}
+addArray(name: "yaroslav", sername: "samborsky")
+//________________________________________________________7.4
+func ploshad(radius r: Double, konst p:Double = 3.14) {
+    print("Площадь круга равна \((r*r) * p)")
+}
+//________________________________________________________7.5
+var studentsDictionary = ["name": ("max", "bob", "john"), "score": ("5", "10", "12")]
+print(studentsDictionary["name"] ?? "")
+//________________________________________________________7.1.1
+func sumArray(arrayOne: [String], arrayTwo: [String], arrayThree: [String]) {
+let summaryArray = arrayOne + arrayTwo + arrayThree
+    var arrayInt = [Int]()
+    for i in summaryArray {
+let b = Int(i) ?? 0
+        arrayInt.append(b)
+    }
+   print(arrayInt.reduce(0, +))//складываем все элементы массива
+}
+sumArray(arrayOne: ["1", "2"], arrayTwo: ["3", "4"], arrayThree: ["5", "6"])
+//________________________________________________________7.1.2
+//MARK: - замыкания
+//________________________________________________________8.1
+//замыкания это анонимные функции, которые можно передать в качестве аргумента в другие функции
+//нужны они для упрощения кода
+//________________________________________________________8.2
+var testArray = [1,6,3,8,9,3,44,7,11]
+print(testArray.sorted(by: {$0 < $1}))
+print(testArray.sorted(by: >))
+print(testArray.sorted(by: { (num1: Int, num2: Int) in num1 < num2 }))
+print(testArray.sorted(by: {(num1, num2) in num1 < num2 }))
+print(testArray.sorted(by: {(num1: Int, num2: Int) -> Bool in num1 < num2}))
+//________________________________________________________8.3
+var newArrayThree = [Int]()
+func arrayEmpty(array: [Int]) {
+   var newArray = array
+    if newArray.isEmpty {
+        newArray.append(5)
+        print(newArray)
+    } else {
+        print("массив полный")
+    }
+}
+arrayEmpty(array: newArrayThree)
+//________________________________________________________8.4
+func site(name: String, sername: String, nicname: String, email: String, password: String) {
+print(name, sername, nicname, email, password)
+}
+//________________________________________________________8.5
+var newDictOne = [String: Int]()
+var newArrayFour = [5]
+func checking(dict: [String: Int], array: [Int]) {
+    if newDictOne.isEmpty {
+        newDictOne.updateValue(4, forKey: "hello")
+    } else {
+        print("словарь полный")
+    }
+    if newArrayFour.isEmpty {
+        newArrayFour.append(99)
+    } else {
+        print("массив полный")
+    }
+    print("\(newDictOne) \(newArrayFour)")
+}
+checking(dict: newDictOne, array: newArrayFour)
+//MARK: - перечисления
+//________________________________________________________9.1
+//перечисления нужны для обезопасывания кода, с их помощью пожно описывать классы, структуры
+//________________________________________________________9.2
+enum People {
+    case fat
+    case skinny
+}
 
+enum Color {
+    case black
+    case white
+    case blue
+    case green
+}
+
+enum Weather {
+    case rain, sun, cloud, snow
+}
+
+enum Compas {
+    case south
+    case west
+    case north
+    case east
+
+    var name: String {
+        switch self {
+        case .south:
+            return "юг"
+        case .west:
+            return "запад"
+        case .north:
+            return "север"
+        case .east:
+            return "восток"
+        }
+    }
+}
+
+enum Cat: String {
+    case british = "британская"
+    case russian = "русская"
+}
+
+let sideOfCompas = Compas.south
+print(sideOfCompas.name)
+
+let Colorss = Color.black
+
+switch Colorss {
+case .black:
+    print("черный")
+case .blue:
+    print("синий")
+case .green:
+    print("зеленый")
+case .white:
+    print("белый")
+}
+//________________________________________________________9.3
+enum Resume {
+    case name
+    case sername
+    case age
+    case profession
+    case hobby
+}
+let yaroslavSamborsky = Resume.age
+if yaroslavSamborsky == .sername {
+    print("Самборский")
+} else if yaroslavSamborsky == .age {
+    print(29)
+} else if yaroslavSamborsky == .name {
+    print("Ярослав")
+} else if yaroslavSamborsky == .hobby {
+    print("игры")
+} else if yaroslavSamborsky == .profession {
+    print("программист")
+}
+print("----------switch---------")
+switch yaroslavSamborsky {
+case .age:
+    print(29)
+case .profession:
+    print("программист")
+case .hobby:
+    print("игры")
+case .sername:
+    print("Самборский")
+case .name:
+    print("Ярослав")
+}
+//________________________________________________________9.4
+enum DeviceColors {
+    case red
+    case blue
+    case green
+    case white
+    case black
+}
+enum Device {
+    case iphone
+    case watch
+    case notebook
+    case ipad
+}
+
+func appleDevices(device: Device, color: DeviceColors) {
+    print("ваш \(device) теперь \(color) цвета")
+}
+appleDevices(device: .notebook, color: .red)
+//MARK: - классы и структуры
+//________________________________________________________10.1
+class PeopleOne {
+    var name: String
+    var age: Int
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+class Son: PeopleOne {
+}
+let alexSon = Son(name: "Alex", age: 6)
+
+class Country {
+    var name: String
+    var capital: String
+    var population: Int
+    var populationTo2050: Double {
+        return (Double(population) * 1.38).rounded()
+    }
+    init(name: String, capital: String, population: Int) {
+        self.name = name
+        self.capital = capital
+        self.population = population
+    }
+}
+let newCountry = Country(name: "Canada", capital: "Ottawa", population: 54334595)
+print(newCountry.populationTo2050)
+//________________________________________________________10.2
+class House {
+    var width: Int
+    var height: Int
+    var getWidth: Int {
+        return build()
+    }
+    init(width: Int, height: Int) {
+        self.height = height
+        self.width = width
+    }
+    ///умножение ширины на высоту
+    func build() -> Int {
+       return width * height
+    }
+}
+let house = House(width: 50, height: 4)
+print(house.build())
+print(house.getWidth)
+//________________________________________________________10.3
+class Names {
+    var names: [String] = []
+    var funcNames = ["albert", "max", "yaroslav", "yakov", "alex", "bob", "boris"]
+    init(names: [String]) {
+        self.names = names
+    }
+///выводит имена которые начинаются на букву " " в уже готовом массиве
+    func findNameByCharacter(type character: String) -> [String] {
+
+var newArray = [String]()
+        for name in funcNames {
+
+            if name.hasPrefix(character) {
+                newArray.append(name)
+            }
+        }
+        return newArray.sorted(by: {$0 > $1})
+    }
+    ///вторая часть задания с методом
+    func findNamesArray(names: [String] , letter: String) {
+        for i in names {
+            //создаем новый массив для тех имен которые попадают под условие
+            var newArray = [String]()
+            //проверка условия, если слово начинается на букву letter
+            if i.hasPrefix(letter) {
+                newArray.append(i)
+            }
+            //еще одие цикл, чтобы извлечь имена из массива и вывести с новой строки
+            for i in newArray {
+                print(i)
+            }
+        }
+    }
+}
+let names = Names(names: ["maria", "oleg", "yaroslav", "marta"])
+print(names.findNameByCharacter(type: "y"))
+//я не стал заморачиваться будет введена маленькая или большая буква, возможно стоит переписать
+names.findNamesArray(names: ["oleg", "maria", "masha", "yaroslav"], letter: "m")
+//________________________________________________________10.4
+class Students {
+    var name = ["василий", "иван", "федя", "маша", "паша", "саша", "ярослав", "альберт", "боб", "иван", "петя", "игорь", "олеся", "влада", "маша", "алина", "артем", "игнат", "софия", "злата", "марина", "джон", "паша", "валя", "артем", "ярослав", "света", "алина", "алена", "катя", "оксана", "лена", "юля", "дима", "олег", "саша", "петя", "иван", "борис", "игнат", "олег"]
+
+    ///подсчет учеников и их сортировка
+    func countAndSort() {
+        print("ученики теперь отсортированы по алфавиту")
+        print(name.sorted())
+        if name.count > 30 {
+            print("в школе нет мест, в классе и так \(name.count) учеников")
+        } else {
+            print("всего в классе \(name.count) учеников")
+        }
+    }
+}
+let students = Students()
+students.countAndSort()
+//________________________________________________________10.5
