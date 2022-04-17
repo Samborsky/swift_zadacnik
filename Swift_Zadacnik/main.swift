@@ -511,3 +511,86 @@ class Students {
 let students = Students()
 students.countAndSort()
 //________________________________________________________10.5
+struct Car {
+    enum Engine {
+        case on
+        case off
+    }
+    enum FuelType {
+        case gas
+        case benzin
+        case diesel
+    }
+    var engine: Engine
+    var fuel: FuelType
+    var mark: String
+    var model: String
+}
+let car1 = Car(engine: .off, fuel: .benzin, mark: "Ford", model: "Focus")
+
+struct PeopleTwo {
+    var name: String
+    var age: Int
+    var gender: Gender = .female
+
+    enum Gender {
+        case male
+        case female
+    }
+
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    init(name: String, age: Int, gender: Gender) {
+        self.name = name
+        self.age = age
+        self.gender = gender
+    }
+}
+let peopleThree = PeopleTwo(name: "Maria", age: 30, gender: .female)
+let peopleFour = PeopleTwo(name: "bob", age: 34)
+//________________________________________________________10.6
+enum Buy {
+    case yes
+    case no
+    var name: String {
+        switch self {
+        case .yes:
+            return "куплено"
+        case .no:
+            return "не куплено"
+        }
+    }
+}
+
+struct ProductsList {
+    var products = [String]()
+///добавление товаров в список
+   mutating func addToShopingList(product: String) {
+       products.append(product)
+    }
+    ///проверка куплен товар или нет
+    func checkShoppingList(productOne: String) {
+        for product in products {
+            if product == productOne {
+                print("\(product) уже \(Buy.yes.name)")
+            } else {
+                print("\(product) еще \(Buy.no.name)")
+            }
+        }
+    }
+}
+var shopList = ProductsList()
+shopList.addToShopingList(product: "bananas")
+shopList.addToShopingList(product: "cocumber")
+shopList.addToShopingList(product: "coconut")
+shopList.addToShopingList(product: "juice")
+print(shopList.products)
+
+shopList.checkShoppingList(productOne: "juice")
+//MARK: - свойства экземпляра
+//________________________________________________________11.1
+
+
