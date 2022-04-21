@@ -240,13 +240,13 @@ var studentsDictionary = ["name": ("max", "bob", "john"), "score": ("5", "10", "
 print(studentsDictionary["name"] ?? "")
 //________________________________________________________7.1.1
 func sumArray(arrayOne: [String], arrayTwo: [String], arrayThree: [String]) {
-let summaryArray = arrayOne + arrayTwo + arrayThree
+    let summaryArray = arrayOne + arrayTwo + arrayThree
     var arrayInt = [Int]()
     for i in summaryArray {
-let b = Int(i) ?? 0
+        let b = Int(i) ?? 0
         arrayInt.append(b)
     }
-   print(arrayInt.reduce(0, +))//складываем все элементы массива
+    print(arrayInt.reduce(0, +))//складываем все элементы массива
 }
 sumArray(arrayOne: ["1", "2"], arrayTwo: ["3", "4"], arrayThree: ["5", "6"])
 //________________________________________________________7.1.2
@@ -264,7 +264,7 @@ print(testArray.sorted(by: {(num1: Int, num2: Int) -> Bool in num1 < num2}))
 //________________________________________________________8.3
 var newArrayThree = [Int]()
 func arrayEmpty(array: [Int]) {
-   var newArray = array
+    var newArray = array
     if newArray.isEmpty {
         newArray.append(5)
         print(newArray)
@@ -275,7 +275,7 @@ func arrayEmpty(array: [Int]) {
 arrayEmpty(array: newArrayThree)
 //________________________________________________________8.4
 func site(name: String, sername: String, nicname: String, email: String, password: String) {
-print(name, sername, nicname, email, password)
+    print(name, sername, nicname, email, password)
 }
 //________________________________________________________8.5
 var newDictOne = [String: Int]()
@@ -448,7 +448,7 @@ class House {
     }
     ///умножение ширины на высоту
     func build() -> Int {
-       return width * height
+        return width * height
     }
 }
 let house = House(width: 50, height: 4)
@@ -461,10 +461,10 @@ class Names {
     init(names: [String]) {
         self.names = names
     }
-///выводит имена которые начинаются на букву " " в уже готовом массиве
+    ///выводит имена которые начинаются на букву " " в уже готовом массиве
     func findNameByCharacter(type character: String) -> [String] {
 
-var newArray = [String]()
+        var newArray = [String]()
         for name in funcNames {
 
             if name.hasPrefix(character) {
@@ -567,9 +567,9 @@ enum Buy {
 
 struct ProductsList {
     var products = [String]()
-///добавление товаров в список
-   mutating func addToShopingList(product: String) {
-       products.append(product)
+    ///добавление товаров в список
+    mutating func addToShopingList(product: String) {
+        products.append(product)
     }
     ///проверка куплен товар или нет
     func checkShoppingList(productOne: String) {
@@ -592,5 +592,401 @@ print(shopList.products)
 shopList.checkShoppingList(productOne: "juice")
 //MARK: - свойства экземпляра
 //________________________________________________________11.1
+class CarOne {
+
+    enum Engine {
+        case on
+        case off
+    }
+
+    enum Condition {
+        case new
+        case old
+    }
+
+    enum AirCondition {
+        case yes
+        case no
+    }
+
+    var engine: Engine = .off
+    var condinion: Condition = .new
+    var dealerPrice: Int
+    var ac: AirCondition
+    ///цена в зависимости от значения переменной "ac"
+    var priceWithOptions: Double {
+        get {
+            var newPrice = Double(dealerPrice)
+            if ac == .yes {
+                newPrice = Double(dealerPrice) * 1.1
+            }
+            return newPrice
+        }
+    }
+    init(dealerPrice: Int, ac: AirCondition) {
+        self.dealerPrice = dealerPrice
+        self.ac = ac
+    }
+}
+
+let newCar = CarOne(dealerPrice: 1000, ac: .no)
+print(newCar.priceWithOptions)
+
+class Triangle {
+    var sideA: Double
+    var sideB: Double
+    var sideC: Double
+    var perimetr: Double {
+        return sideA + sideB + sideC
+    }
+    init(sideA: Double, sideB: Double, sideC: Double) {
+        self.sideA = sideA
+        self.sideB = sideB
+        self.sideC = sideC
+    }
+}
+
+let triangle = Triangle(sideA: 5, sideB: 6, sideC: 7)
+print(triangle.perimetr)
+
+class PeopleFour {
+    var name: String
+    var nickName: String {
+        didSet {
+            print("старая кличка \(oldValue) не актуальна, буду теперь называться \(nickName)")
+        }
+    }
+    var age: Int
+    init(name: String, age: Int, nickName: String) {
+        self.name = name
+        self.age = age
+        self.nickName = nickName
+    }
+}
+let peopleFive = PeopleFour(name: "yaroslav", age: 29, nickName: "Space")
+print(peopleFive.nickName)
+peopleFive.nickName = "Brave"
+
+class PeopleSix: PeopleFour {
+    var pet: Bool
+    var weight: Double
+    init(pet: Bool, weight: Double) {
+        self.pet = pet
+        self.weight = weight
+        super.init(name: "", age: 0, nickName: "")
+    }
+    convenience init(pet: Bool) {
+        self.init(pet: pet, weight: 15.4)
+
+    }
+}
+let peopleSix = PeopleSix(pet: true)
 
 
+struct CarTwo {
+    var mark: String
+    var turbine = true
+}
+var carTwo = CarTwo(mark: "ford")
+
+class PeopleEight {
+    var name: String
+    var age: Int
+    var getOlder: Int {
+        get {
+            return age + 1
+        }
+        set {
+            print("ты поменял свйо возраст, тебе теперь \(newValue)")
+        }
+    }
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+let peopleEight = PeopleEight(name: "Mark", age: 50)
+print(peopleEight.age)
+print(peopleEight.getOlder)
+peopleEight.getOlder = 60
+//-----------------------------------------------------------------------------------пример из ютуба с lazy
+struct Calculator {
+    static func calculateGamesPlayed() -> Int {
+        var games = [Int]()
+        for i in 1...4000 {
+            games.append(i)
+        }
+        return games.last ?? 0
+    }
+}
+
+struct Player {
+    var name: String
+    var team: String
+    var position: String
+    lazy var gamesPlayed = {
+        Calculator.calculateGamesPlayed()
+    } ()
+
+    lazy var introduction = {
+        return "Now entering the game: \(name), \(position) for the \(team)"
+    }()
+}
+
+var jordan = Player(name: "Michael Jordan", team: "Bulls", position: "Shooting Guard")
+//jordan.gamesPlayed
+
+struct Player2 {
+    var name: String
+    var team: String
+    var position: String
+    lazy var gamesPlayed = {
+        Calculator.calculateGamesPlayed()
+    } ()
+    lazy var introduction = {
+        return "Now entering the game: \(name), \(position) for the \(team)"
+    }()
+}
+
+var jordan2 = Player2(name: "Michael Jordan", team: "Bulls", position: "Shooting Guard")
+//-----------------------------------------------------------------------------------еще один пример из ютуба с lazy
+class DataProvider {
+    var data: String
+    init() {
+        //sleep позволяет отложить выполнение кода на n секунд
+        sleep(0)
+        data = "Ленивое вычисление"
+    }
+}
+
+class Client {
+    //благодаря тому, что dataProvider имеет свойство lazy, сначала сработает print("1") и print("2") и только потом будет выполнен остальной код
+    lazy var dataProvider = DataProvider()
+}
+print("1")
+//если бы dataProvider был не lazy, то мы бы сначала получили print("1") и ждали
+var client = Client()
+print("2")
+print(client.dataProvider.data)
+print("3")
+
+hello: for i in 1...10 {
+    for j in 1...10 {
+        let product = i * j
+        if product == 50 {
+            break hello
+        }
+        print("\(i) * \(j) is the product of \(product)")
+    }
+}
+//________________________________________________________11.2
+
+class CalculatorNew {
+    var numberOne: Double
+    var numberTwo: Double
+    var addition: Double {
+        return numberOne + numberTwo
+    }
+    var subtraction: Double {
+        return numberOne - numberTwo
+    }
+    var devide: Double {
+        return numberOne / numberTwo
+    }
+    var multiply: Double {
+        return numberOne * numberTwo
+    }
+
+    init(numberOne: Double, numberTwo: Double) {
+        self.numberOne = numberOne
+        self.numberTwo = numberTwo
+    }
+}
+let calculator = CalculatorNew(numberOne: 40, numberTwo: 90)
+print(calculator.addition)
+print(calculator.subtraction)
+print(calculator.devide)
+print(calculator.multiply)
+//________________________________________________________11.3, 11.4, 11.5
+enum AppCategory {
+
+    enum Programs {
+        case business
+        case food
+        case health
+        case maps
+        case music
+        case education
+
+        var name: String {
+            switch self {
+            case .business:
+                return "бизнес"
+            case .food:
+                return "еда"
+            case .health:
+                return "здоровье"
+            case .maps:
+                return "карты и навигация"
+            case .music:
+                return "музыка"
+            case .education:
+                return "образование"
+            }
+        }
+    }
+}
+
+class AppStore {
+
+    ///имя приложения
+   private let appName: String
+    ///категория приложения
+   private let programCategory: AppCategory.Programs
+    ///суммарное число рейтинга для подсчета среднего
+    private var summaryRating: Double = 0
+    ///количество отзывов
+    private var ratingCount: Double = 0
+
+    var appInformation: String {
+        return "приложение называется \(appName) и находится в категории \(programCategory.name)"
+    }
+
+///рейтинг приложения
+    var rating: Double {
+       return summaryRating / ratingCount
+    }
+    ///словарь с отзывами к приложению
+    private var reviewAppOne = [String: String]()
+
+    init(appName: String, programCategory: AppCategory.Programs) {
+        self.appName = appName
+        self.programCategory = programCategory
+    }
+
+
+    ///добавление отзыва к приложению
+    func addReview(name: String, review: String, rate ourApp: Int) {
+
+        reviewAppOne.updateValue(review, forKey: name.capitalized)
+
+        if ourApp < 1 || ourApp > 5 {
+            print("введите оценку от 1 до 5 баллов")
+        } else {
+            summaryRating += Double(ourApp)
+            ratingCount += 1
+        }
+    }
+///отзывы пользователей
+    func showReview() {
+        for (key, value) in reviewAppOne {
+            print("пользователь \(key) пишет: \(value)")
+        }
+    }
+}
+///создаем экземпляр класса (наше приложение)
+let newAppOne = AppStore(appName: "calculator", programCategory: .business)
+newAppOne.addReview(name: "маша", review: "нормально приложение", rate: 4)
+newAppOne.addReview(name: "петя", review: "приложение не очень понравилось, хотелось бы инженерные функции", rate: 2)
+newAppOne.addReview(name: "осел", review: "я дурачок, ахаха", rate: 1)
+newAppOne.addReview(name: "ярослав", review: "отличное приложение, разработчик огонь!", rate: 5)
+print(newAppOne.appInformation)
+print(newAppOne.rating)
+newAppOne.showReview()
+
+//________________________________________________________11.6 СДЕЛАТЬ! пока не знаю как, возможно через deinit()
+
+//________________________________________________________11.7 сделать!
+//________________________________________________________11.8 сделать
+
+//________________________________________________________12.1
+//глобальные переменные ожно использовать во всем коде, вызывать где угодно
+//локальные переменные имеют ограниченую область видимости, вызывать их можно только внутри {} где они были объявлены
+//свойства типа - принадлежат самому типу, а не экземплярам этого типа. будет всегда только дна копия этих свйоств независимо от количества экземпляров. свойства типа помечаются ключевым словом static
+
+//свойства экземпляров - свойства которые принадлежат экземпляру конкретного типа, каждый новый экземпляр этого типа
+//имеет свои собственные свйоства экземпляра отдельные от другого экземпляра
+
+//________________________________________________________12.2 возможно я не понял и не так сделал
+
+class ClassOne {
+    var someArray = [1,5,7,1,9,10,400,300,500,1000,17,66,43,99]
+    func sotrting() {
+        print(someArray.sorted {$0 > $1})
+
+    }
+}
+let classOneCopy = ClassOne()
+classOneCopy.sotrting()
+
+class ClassTwo  {
+    var someArray = [1,5,7,1,9,10,400,300,500,1000,17,66,43,99]
+    func sotrting() {
+        print(someArray.sorted {$0 < $1})
+
+    }
+}
+let classTwoCopy = ClassTwo()
+classTwoCopy.sotrting()
+//________________________________________________________12.3
+
+var someArrayTwo = [5,8,3,99,33,55,12,543,91]
+
+class GeneralDirector {
+    ///свойство типа
+    static var maxSalery: Int = 500_000
+
+    var name: String
+    var age: Int
+    var companyName: String
+    var salery: Int {
+        didSet {
+
+            if salery > GeneralDirector.maxSalery {
+                salery = GeneralDirector.maxSalery
+                print("много хочешь, твой потолок \(GeneralDirector.maxSalery)")
+            }
+            print("раньше зарплата была \(oldValue), а будет теперь \(salery)")
+        }
+    }
+
+    init(name: String, age: Int, companyName: String, salery: Int) {
+        self.name = name
+        self.age = age
+        self.companyName = companyName
+        self.salery = salery
+    }
+}
+
+
+
+class GeneralSeller: GeneralDirector {
+    var salesCount: Int
+    var car: String
+
+    init(salesCount: Int, car: String) {
+        self.salesCount = salesCount
+        self.car = car
+        super.init(name: "Mark", age: 30, companyName: "Avon", salery: 200_000)
+    }
+}
+
+class Buhgalter: GeneralDirector {
+    func sumArray(array: [Int]) {
+        print(array.reduce(0, +))
+    }
+}
+
+
+
+//generalDirector.salery = 200_000
+//generalDirector.salery = 400000
+//generalDirector.salery = 600000
+
+let generalDirector = GeneralDirector(name: "Bob", age: 38, companyName: "Avon", salery: 300_000)
+
+let generalSeller = GeneralSeller(salesCount: 5, car: "Volvo")
+
+let buhgalter = Buhgalter(name: "Marina", age: 45, companyName: "Avon", salery: 120_000)
+buhgalter.sumArray(array: someArrayTwo)
+//________________________________________________________12.4
