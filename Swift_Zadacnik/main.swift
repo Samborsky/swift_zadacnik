@@ -990,3 +990,79 @@ let generalSeller = GeneralSeller(salesCount: 5, car: "Volvo")
 let buhgalter = Buhgalter(name: "Marina", age: 45, companyName: "Avon", salery: 120_000)
 buhgalter.sumArray(array: someArrayTwo)
 //________________________________________________________12.4
+class Monster {
+    var name: String
+    var breed: String
+    var planetFrom: String
+    var height: Int {
+        didSet {
+            if weight < Monster.minHeight || weight > Monster.maxHeight {
+                height = oldValue
+            }
+        }
+    }
+    var weight: Int
+    var weapon: String
+    var damage: Int {
+        didSet {
+            if damage < Monster.minWeaponPower || damage > Monster.maxWeaponPOwer {
+                damage = oldValue
+            }
+        print("прошлый удар был \(oldValue) единиц, новый удар нанес \(damage) урона")
+    }
+    }
+    static var minHeight = 60
+    static var maxHeight = 220
+    static var minWeaponPower = 1
+    static var maxWeaponPOwer = 100
+    static var monsterCount = 0
+
+    init(name: String, breed: String, planetFrom: String, height: Int, weight: Int, damage: Int, weapon: String) {
+        self.weight = weight
+        self.name = name
+        self.height = height
+        self.breed = breed
+        self.damage = damage
+        self.planetFrom = planetFrom
+        self.weapon = weapon
+        Monster.monsterCount += 1
+    }
+}
+
+let MonsterOne = Monster(name: "Marcus", breed: "Orc", planetFrom: "Orclandia", height: 150, weight: 200, damage: 50, weapon: "Twohanded Sword")
+
+MonsterOne.height = 50
+print(MonsterOne.height)
+MonsterOne.damage = 99
+MonsterOne.damage = 200
+//________________________________________________________13.1 , 13.2
+class Programmer {
+    var name: String
+    var language: String
+    var library: String
+    var pattern: String
+    var english: Bool
+    var portfolio: Bool
+
+    init(language: String,
+          library: String,
+          pattern: String,
+          english: Bool,
+         portfolio: Bool,
+         name: String) {
+
+        self.language = language
+        self.library = library
+        self.pattern = pattern
+        self.english = english
+        self.portfolio = portfolio
+        self.name = name
+    }
+
+    func programmerInfo() {
+        print(language, library, pattern, english, portfolio)
+    }
+}
+let programmerOne = Programmer(language: "Swift", library: "UIKit", pattern: "don't know", english: true, portfolio: false, name: "Valera")
+programmerOne.programmerInfo()
+//________________________________________________________13.3
