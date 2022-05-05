@@ -807,7 +807,7 @@ print(calculator.addition)
 print(calculator.subtraction)
 print(calculator.devide)
 print(calculator.multiply)
-//________________________________________________________11.3, 11.4, 11.5
+//________________________________________________________11.3, 11.4, 11.5б 11.6
 enum AppCategory {
 
     enum Programs {
@@ -858,12 +858,19 @@ class AppStore {
     }
     ///словарь с отзывами к приложению
     private var reviewAppOne = [String: String]()
+///подсчет количество приложений этого класса
+    static var appsCount = 0
 
     init(appName: String, programCategory: AppCategory.Programs) {
         self.appName = appName
         self.programCategory = programCategory
+        AppStore.appsCount += 1
     }
-
+//деинициализация (удаление приложения из AppStore)
+    deinit {
+        AppStore.appsCount -= 1
+        print("приложение удалено из AppStore")
+    }
 
     ///добавление отзыва к приложению
     func addReview(name: String, review: String, rate ourApp: Int) {
@@ -893,8 +900,16 @@ newAppOne.addReview(name: "ярослав", review: "отличное прило
 print(newAppOne.appInformation)
 print(newAppOne.rating)
 newAppOne.showReview()
+var newAppTwo:AppStore? = AppStore(appName: "Maps.me", programCategory: .maps)
+// теперь у нас 2 приложения
+print(AppStore.appsCount)
+newAppTwo?.addReview(name: "alex", review: "good, very good", rate: 10)
+newAppTwo?.showReview()
+newAppTwo = nil
+print(AppStore.appsCount)
 
-//________________________________________________________11.6 СДЕЛАТЬ! пока не знаю как, возможно через deinit()
+
+
 
 //________________________________________________________11.7 сделать!
 //________________________________________________________11.8 сделать
